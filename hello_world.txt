@@ -1,1 +1,89 @@
-test
+-- WebPack --------------
+npm install webpack webpack-cli --save-dev
+
+|- package.json
+|- package-lock.json
+|- webpack.config.js
+|- /dist
+  |- main.js
+  |- index.html
+|- /src
+  |- index.js
+|- /node_modules
+
+package.json
+
+ {
+   "name": "webpack-demo",
+   "version": "1.0.0",
+   "description": "",
+   "private": true,
+   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "devDependencies": {
+     "webpack": "^5.4.0",
+     "webpack-cli": "^4.2.0"
+   },
+}
+
+webpack.config.js
+
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
+
+npx webpack
+
+---eslint----------
+npm init @eslint/config
+
+---prettier-------
+npm install --save-dev --save-exact prettier
+
+Then, create an empty config file to let editors and other tools know you are using Prettier:
+
+echo {}> .prettierrc.json
+
+Next, create a .prettierignore file to let the Prettier CLI and editors know which files to not format. Here’s an example:
+
+# Ignore artifacts:
+build
+coverage
+
+and use vscode extension
+
+---together-------
+Install eslint-config-prettier:
+
+npm install --save-dev eslint-config-prettier
+Add eslint-config-prettier to your ESLint configuration – either to eslintrc or to eslint.config.js (flat config).
+
+eslintrc: Add "prettier" to the "extends" array in your .eslintrc.* file. Make sure to put it last, so it gets the chance to override other configs.
+
+{
+  "extends": [
+    "some-other-config-you-use",
+    "prettier"
+  ]
+}
+eslint.config.js (flat config): Import eslint-config-prettier, and put it in the configuration array – after other configs that you want to override.
+
+import someConfig from "some-other-config-you-use";
+import eslintConfigPrettier from "eslint-config-prettier";
+
+export default [
+  someConfig,
+  eslintConfigPrettier,
+];
+Finally, run the CLI helper tool to find problems in the "rules" sections of your config.
